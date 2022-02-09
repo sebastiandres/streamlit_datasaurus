@@ -19,3 +19,7 @@ To locally run the app,
 ```
 streamlit run streamlit_app.py
 ```
+
+## Authors
+Sebastian Flores
+Diego Rojo
