@@ -1,21 +1,17 @@
 import streamlit as st
-from py_code import datasaurus
+import importlib
 
-# Set wide display
-st.set_page_config(layout="wide")
+# Set page configuration
+st.set_page_config(layout="wide", page_title="Streamlitsaurus Rex",
+                   page_icon="🦖",
+                   initial_sidebar_state="expanded")
 
-# Set title
-st.title("Datasaurus")
+# Sidebar
+page_dict = {"Intro": "01_intro", "Datasets": "02_preset", "Custom": "03_custom", "About": "04_about"}
+st.sidebar.header("Select page")
+selected_page = st.sidebar.selectbox("Select page", page_dict.keys())
+selected_module = page_dict[selected_page]
 
-# Set header
-st.header("When data run the earth")
-
-# The content
-c1, c2 = st.columns(2)
-shape_start_options = ['dino', 'rando', 'slant', 'big_slant']
-shape_end_options = ['x', 'h_lines', 'v_lines', 'wide_lines', 'high_lines', 'slant_up', 'slant_down', 'center', 'star', 'down_parab', 'circle', 'bullseye', 'dots']
-shape_start = c1.selectbox("Select the starting shape", shape_start_options)
-shape_end = c2.selectbox("Select the target shape", shape_end_options)
-
-if st.button("Run"):
-    datasaurus.run(shape_start, shape_end)
+# Render the content
+current_module = importlib.import_module(selected_module)
+current_module.display_page()
