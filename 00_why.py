@@ -7,14 +7,18 @@ def display_page():
     markdown_placeholder = c2.empty()
     button_placeholder = c2.empty()
 
+    # Markdown for image
+    image_markdown_format = "![Alt Text](https://github.com/sebastiandres/streamlit_datasaurus/blob/main/images/{}?raw=true)"
+
     # Content
-    image_placeholder.image("images/mrdna1.gif", width=400)
+    image_placeholder.markdown(image_markdown_format.format("mrdna1.gif"))
     markdown_placeholder.markdown("""    
     Data Science and Jurassic Park are very similar:
     """)
 
     if button_placeholder.button("Why?"):
-        image_placeholder.image("images/mrdna2.gif", width=400)
+        #image_placeholder.images("images/mrdna2.gif", width=300)
+        image_placeholder.markdown(image_markdown_format.format("mrdna1.gif"))
         markdown_placeholder.markdown("""
         Data Science and Jurassic Park are very similar:
         * You have to ponder the meaning of life
