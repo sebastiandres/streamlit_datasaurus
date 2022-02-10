@@ -13,20 +13,23 @@ def display_page():
     # Anscombe
     st.header("The Anscombe Dataset")
     st.markdown("""
-    * Lorem
-    * Ipsum
+    * [Original publication by Francis Anscombe on 1973](https://www.tandfonline.com/doi/abs/10.1080/00031305.1973.10478966)
+    * [Wikipedia's entry on Anscombe's Quarter](https://en.wikipedia.org/wiki/Anscombe%27s_quartet)
     """)    
 
 
     # Datasaurius
     st.header("The Datasaurus")
     st.markdown("""
-    * Lorem
-    * Ipsum
-    """)    
+    * [Tweet that originated the madness](https://twitter.com/sebastiandres/status/1209898410083717120)
+    * [Same Stats, Different Graphs - also known as the Datasaurus paper](https://www.autodesk.com/research/publications/same-stats-different-graphs) by Justin Matejka and George Fitzmaurice.
+    * [Python implementation of Same Stats, Different Graphs](https://github.com/jmatejka/same-stats-different-graphs) by jmatejka.
+    """)
 
     # Other links and references
     st.header("Links and references")
     st.markdown("""
-    * The gifs: made with [youtube](https://www.youtube.com/watch?v=h58lRIVHhGc) and [gifrun](https://gifrun.com/)
+    * All characters from Jurassic Park's franchise have been used in good faith with no comercial intention.
+    * The gifs: made with [youtube](https://www.youtube.com/watch?v=h58lRIVHhGc) and [gifrun](https://gifrun.com/).
+    * [Dinosaur Supervisor Phil Tippett](https://github.com/sebastiandres/streamlit_datasaurus/blob/main/images/phil.jpg?raw=true). You had one job, Phil one job.
     """)
