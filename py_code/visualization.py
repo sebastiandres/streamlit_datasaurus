@@ -97,7 +97,7 @@ def animate_from_path(shape_start, shape_end):
     num_frames = 100
     for i in range(num_frames):
         time.sleep(0.01)
-        filename = f"data/{shape_start}->{shape_end}/frame-{i:05}.csv"
+        filename = f"data/{shape_start}_to_{shape_end}/frame-{i:05}.csv"
         df = pd.read_csv(filename)
         animate_from_df(df, progress_bar_placeholder, altair_placeholder, progress=i, num_frames=num_frames)
     progress_bar_placeholder.empty()

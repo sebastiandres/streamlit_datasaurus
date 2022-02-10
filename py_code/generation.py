@@ -408,7 +408,7 @@ def run_pattern(df,
             r_good = test_good
 
         # Custom filepath
-        custom_filepath = "./data/{}->{}".format(shape_start, target)
+        custom_filepath = "./data/{}_to_{}".format(shape_start, target)
 
         try:
             os.mkdir("./data")
