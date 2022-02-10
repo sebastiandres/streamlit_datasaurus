@@ -51,14 +51,14 @@ def plot_frame(df, size=300):
             font="monospace",
             baseline="top",
             align="left",
-            color="grey",
+            color="#fff9",
         )
         .encode(
             x=alt.value(0),
             y=alt.value((size - 5 * fontSize) / 2),
             text=alt.value(stats_long),
         )
-        .properties(width=1, height=1)
+        .properties(width=size, height=size)
     )
 
     labels_2_dec = (
@@ -68,25 +68,41 @@ def plot_frame(df, size=300):
             font="monospace",
             baseline="top",
             align="left",
-            color="black",
+            color="white",
         )
         .encode(
             x=alt.value(0),
             y=alt.value((size - 5 * fontSize) / 2),
             text=alt.value(stats_short),
         )
-        .properties(width=1, height=1)
+        .properties(width=size, height=size)
     )
     scatterplot = (
         alt.Chart(df)
-        .mark_circle()
+        .mark_circle(color="white", opacity=1)
         .encode(
             alt.X("x", scale=alt.Scale(domain=(0, 100))),
             alt.Y("y", scale=alt.Scale(domain=(0, 100))),
         )
         .properties(width=size, height=size)
     )
-    return scatterplot | labels_9_dec + labels_2_dec
+
+    chart = (
+        (scatterplot | labels_9_dec + labels_2_dec)
+        .configure(
+            background="#235099",
+        )
+        .configure_axis(
+            gridColor="#fff9",
+            domainColor="#fff",
+            labelColor="#fff",
+            tickColor="#fff",
+            titleColor="#fff",
+        )
+        .configure_view(strokeOpacity=0)
+    )
+
+    return chart
 
 
 def animate_from_path(shape_start, shape_end):
@@ -99,17 +115,22 @@ def animate_from_path(shape_start, shape_end):
         time.sleep(0.01)
         filename = f"data/{shape_start}_to_{shape_end}/frame-{i:05}.csv"
         df = pd.read_csv(filename)
-        animate_from_df(df, progress_bar_placeholder, altair_placeholder, progress=i, num_frames=num_frames)
+        animate_from_df(
+            df,
+            progress_bar_placeholder,
+            altair_placeholder,
+            progress=i,
+            num_frames=num_frames,
+        )
     progress_bar_placeholder.empty()
 
 
-def animate_from_df(df, progress_bar_placeholder, altair_placeholder, 
-                    progress=-1, num_frames=100):
-    if progress==-1 or progress==num_frames-1:
+def animate_from_df(
+    df, progress_bar_placeholder, altair_placeholder, progress=-1, num_frames=100
+):
+    if progress == -1 or progress == num_frames - 1:
         progress_bar_placeholder.empty()
     else:
         plot = plot_frame(df)
         altair_placeholder.altair_chart(plot)
         progress_bar_placeholder.progress(progress)
-
-
