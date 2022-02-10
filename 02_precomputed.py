@@ -9,10 +9,11 @@ def display_page():
 
     # Set header
     st.header("When data run the earth")
-    st.markdown("This loads the dataset from disk, nothing is computed, just rendered (SOME COMBINATIONS MIGHT BE MISSING)")
-    st.markdown("Test: slant -> star")
-    st.markdown("Test: big_slant -> dots")
-    st.markdown("Test: rando -> h_lines")
+    st.markdown("Loading precomputed dataset from disk")
+    #, just rendered (SOME COMBINATIONS MIGHT BE MISSING)")
+    #st.markdown("Test: slant -> star")
+    #st.markdown("Test: big_slant -> dots")
+    #st.markdown("Test: rando -> h_lines")
 
     # The content
     c1, c2, c3 = st.columns([1, 1, 3])
@@ -23,6 +24,8 @@ def display_page():
     shape_start = c1.selectbox("Select the starting shape", shape_start_options)
     shape_end = c2.selectbox("Select the target shape", shape_end_options)
 
-    if st.button("Run"):
+    c3.markdown("")
+    c3.markdown("")
+    if c3.button("Show me!"):
         visualization.animate_from_path(shape_start, shape_end)
         
