@@ -89,8 +89,9 @@ def plot_frame(df, size=300):
 
     chart = (
         (scatterplot | labels_9_dec + labels_2_dec)
-        .configure(
+        .properties(
             background="#235099",
+            padding={"left": 20, "top": 20, "right": 20, "bottom": 20},
         )
         .configure_axis(
             gridColor="#fff9",
