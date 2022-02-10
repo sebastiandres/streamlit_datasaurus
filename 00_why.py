@@ -8,13 +8,13 @@ def display_page():
     button_placeholder = c2.empty()
 
     # Content
-    image_placeholder.image("images/mrdna.gif", width=400)
+    image_placeholder.image("images/mrdna1.gif", width=400)
     markdown_placeholder.markdown("""    
     Data Science and Jurassic Park are very similar:
     """)
 
     if button_placeholder.button("Why?"):
-        image_placeholder.image("images/frog.gif", width=400)
+        image_placeholder.image("images/mrdna2.gif", width=400)
         markdown_placeholder.markdown("""
         Data Science and Jurassic Park are very similar:
         * You have to ponder the meaning of life
