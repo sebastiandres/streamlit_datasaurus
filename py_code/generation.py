@@ -1,16 +1,11 @@
 import sys
 import math
 import itertools
-import pkg_resources as pkg
 
-import pandas as pd
-import seaborn as sns
-import matplotlib.pyplot as plt
 import numpy as np
 
 import pytweening
 import tqdm
-from docopt import docopt
 
 import os
 
