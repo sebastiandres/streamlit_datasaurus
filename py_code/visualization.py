@@ -89,22 +89,27 @@ def plot_frame(df, size=300):
     return scatterplot | labels_9_dec + labels_2_dec
 
 
-def run(shape_start, shape_end):
-    datasaurus_dozen = pd.read_csv(
-        "https://raw.githubusercontent.com/jmatejka/same-stats-different-graphs/master/samestats/datasets/generated/DatasaurusDozen.tsv",
-        sep="\t",
-    )
-    dsets = datasaurus_dozen["dataset"].unique()
-    n = len(dsets)
-
-    ph0 = st.empty()
-    ph1 = st.empty()
-    ph2 = st.empty()
-    for i in range(101):
+def animate_from_path(shape_start, shape_end):
+    # Placeholders to be filled in later
+    progress_bar_placeholder = st.empty()
+    altair_placeholder = st.empty()
+    # Iterate
+    num_frames = 100
+    for i in range(num_frames):
         time.sleep(0.01)
-        df = datasaurus_dozen[datasaurus_dozen["dataset"] == dsets[i % n]]
+        filename = f"data/{shape_start}->{shape_end}/frame-{i:05}.csv"
+        df = pd.read_csv(filename)
+        animate_from_df(df, progress_bar_placeholder, altair_placeholder, progress=i, num_frames=num_frames)
+    progress_bar_placeholder.empty()
+
+
+def animate_from_df(df, progress_bar_placeholder, altair_placeholder, 
+                    progress=-1, num_frames=100):
+    if progress==-1 or progress==num_frames-1:
+        progress_bar_placeholder.empty()
+    else:
         plot = plot_frame(df)
-        ph0.altair_chart(plot)
-        ph1.write(shape_start + " -> " + shape_end)
-        ph2.progress(i)
-    ph2.empty()
+        altair_placeholder.altair_chart(plot)
+        progress_bar_placeholder.progress(progress)
+
+
