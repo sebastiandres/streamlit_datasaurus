@@ -18,7 +18,7 @@ def display_page():
 
     if button_placeholder.button("Why?"):
         #image_placeholder.images("images/mrdna2.gif", width=300)
-        image_placeholder.markdown(image_markdown_format.format("mrdna1.gif"))
+        image_placeholder.markdown(image_markdown_format.format("mrdna2.gif"))
         markdown_placeholder.markdown("""
         Data Science and Jurassic Park are very similar:
         * You have to ponder the meaning of life
