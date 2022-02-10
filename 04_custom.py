@@ -43,6 +43,7 @@ def display_page():
     if st.button("Run"):
         # Get the lines
         lines_from_canvas = st.session_state["lines"]
+        st.write(lines_from_canvas)
         # Placeholders to be filled in later
         progress_bar_placeholder = st.empty()
         altair_placeholder = st.empty()

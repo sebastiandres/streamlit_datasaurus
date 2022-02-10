@@ -291,7 +291,7 @@ def perturb(
                 lines = get_points_for_shape(target)
             else:
                 lines = lines_from_canvas
-
+            
             # calculate how far the point is from the closest one of these
             old_dist = np.min([
                 distance_point_line(i_xm, i_ym, l[0][0], l[0][1], l[1][0], l[1][1])
