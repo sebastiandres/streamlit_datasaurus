@@ -4,7 +4,7 @@ import importlib
 # Set page configuration
 st.set_page_config(layout="wide", page_title="Streamlitsaurus Rex",
                    page_icon="🦖",
-                   initial_sidebar_state="collapsed")
+                   initial_sidebar_state="expanded")
 
 # Sidebar
 page_dict = {
