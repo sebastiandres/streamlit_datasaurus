@@ -7,16 +7,15 @@ from py_code import keywords
 
 def display_page():
     # Set title
-    st.title("Datasaurus")
+    st.title("Where can I see a Datasaurus?")
 
     # Radio buttons with the options
     options = {
-                "No time. Animate from precomputed values (fastest)":"animate",
-                "This is important enought. I'll make some time. Compute and animate from scratch (slow, 2-3 minutes)":"compute",
+                "This is important enought. I'll make some time. Compute and animate from scratch (slow, 2-3 minutes).":"compute",
+                "I'm too important and have no time. Animate from precomputed values (fastest).":"animate",
                 }
     selected_option_text = st.radio("How much time can you spare?", options.keys(), index=0)
     selected_option = options[selected_option_text]
-    st.write("You selected:", selected_option)
 
     # The content
     c1, c2, c3 = st.columns([1, 1, 3])

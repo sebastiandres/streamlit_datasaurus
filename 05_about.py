@@ -9,7 +9,7 @@ def display_page():
 
     # Image
     image_markdown_format = "![Alt Text](https://github.com/sebastiandres/streamlit_datasaurus/blob/main/images/{}?raw=true)"
-    c1.markdown(image_markdown_format.format("mrdna.png"))
+    c1.markdown(image_markdown_format.format("mrdna.jpg"))
 
     # Authors
     c2.header("The authors")

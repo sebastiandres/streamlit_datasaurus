@@ -392,7 +392,7 @@ def run_pattern(df,
             iters + 1, leave=True, ascii=True, desc=target + " pattern"):
         t = (max_temp - min_temp) * s_curve(((iters - i) / iters)) + min_temp
 
-        if target in ALL_TARGETS:
+        if target in ALL_TARGETS + ["drawable_canvas"]:
             test_good = perturb(
                 r_good.copy(), initial=df, target=target, lines_from_canvas=lines_from_canvas, temp=t)
         else:
@@ -447,7 +447,12 @@ def run(shape_start, shape_end, store_csv=False,
     return
 
 if __name__ == '__main__':
+    import glob
     for shape_start in INITIAL_DATASETS:
         for shape_end in ALL_TARGETS:
             print(f"Computing {shape_start} to {shape_end}")
-            run(shape_start, shape_end, store_csv=True)
+            files = glob.glob(f"./data/precomputed_transitions/{shape_start}_to_{shape_end}/*.csv")
+            if len(files)==100:
+                print("\tAlready computed")
+            else:
+                run(shape_start, shape_end, store_csv=True)

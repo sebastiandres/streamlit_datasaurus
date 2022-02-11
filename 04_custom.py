@@ -12,8 +12,8 @@ def clear_lines():
 
 def display_page():
     # Set title
-    st.title("Create your own dataset")
-    st.markdown("Define the number of random points and the figure, and explore how the points converge!")
+    st.title("Can I have my own Datasaurus?")
+    st.markdown("YES. YOU CAN CREATE YOUR OWN DATASAURUS!!! HOW CRAZY IS THAT???!!! \n\n Define the number of random points and the figure, and explore how the points converge!")
 
     ## Input
     c1, c2 = st.columns([4, 6])
@@ -55,17 +55,21 @@ def display_page():
 
     # The Iteration
     st.title("Iteration")
+    c1, c2 = st.columns([1, 9])
     if len(st.session_state["lines"])==0:
         st.markdown("Please add at least 1 line")
-    elif st.button("Run"):
-        # Get the lines
-        lines_from_canvas = st.session_state["lines"]
-        # Placeholders to be filled in later
-        progress_bar_placeholder = st.empty()
-        altair_placeholder = st.empty()
-        num_frames = 1000
-        for frame in range(num_frames):
-            df = generation.run_pattern(df, shape_start, shape_end, 
-                    lines_from_canvas=lines_from_canvas, iters=100, num_frames=1, decimals=2)
-            progress = frame / num_frames
-            visualization.animate_from_df(df, progress_bar_placeholder, altair_placeholder, progress, num_frames)
+    else:
+        run = c1.button("Run")
+        c2.markdown("Simulation can take up to 5 minutes. Please be patient.")
+        if run:
+            # Get the lines
+            lines_from_canvas = st.session_state["lines"]
+            # Placeholders to be filled in later
+            progress_bar_placeholder = st.empty()
+            altair_placeholder = st.empty()
+            num_frames = 1000
+            for frame in range(num_frames):
+                df = generation.run_pattern(df, shape_start, shape_end, 
+                        lines_from_canvas=lines_from_canvas, iters=100, num_frames=1, decimals=2)
+                progress = frame / num_frames
+                visualization.animate_from_df(df, progress_bar_placeholder, altair_placeholder, progress, num_frames)

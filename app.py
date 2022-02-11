@@ -8,13 +8,12 @@ st.set_page_config(layout="wide", page_title="Streamlitsaurus Rex",
 
 # Sidebar
 page_dict = {
-            "Why": "00_why", 
-            "Intro": "01_intro", 
-            #"Precomputed": "02_precomputed", 
-            "Datasaurus": "03_datasaurus", 
-            "Custom": "04_custom", 
+            "Welcome!": "00_why", 
+            "What is a Datasaurus?": "01_intro", 
+            "Where can I see a Datasaurus?": "03_datasaurus", 
+            "Can I have my own Datasaurus?": "04_custom", 
             "About": "05_about"}
-st.sidebar.header("Select page")
+st.sidebar.header("Navigation")
 selected_page = st.sidebar.selectbox("Select page", page_dict.keys())
 selected_module = page_dict[selected_page]
 
