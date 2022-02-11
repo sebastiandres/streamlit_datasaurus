@@ -11,7 +11,7 @@ def display_page():
 
     # Radio buttons with the options
     options = {
-                "This is important enought. I'll make some time. Compute and animate from scratch (slow, 2-3 minutes).":"compute",
+                "This is important enough. I'll make some time. Compute and animate from scratch (slow, 2-3 minutes).":"compute",
                 "I'm too important and have no time. Animate from precomputed values (fastest).":"animate",
                 }
     selected_option_text = st.radio("How much time can you spare?", options.keys(), index=0)
