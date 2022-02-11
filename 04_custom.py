@@ -5,56 +5,55 @@ import numpy as np
 
 from py_code import visualization
 from py_code import generation
+from py_code import keywords
+
+def clear_lines():
+    st.session_state["lines"] = []
 
 def display_page():
     # Set title
-    st.title("Draw-your-adventure")
-    st.markdown("Here you can draw a figure by segments and attempt to converge to it!")
+    st.title("Create your own dataset")
+    st.markdown("Define the number of random points and the figure, and explore how the points converge!")
 
     ## Input
-    # Lines from canvas
-    st.header("Input")
     c1, c2 = st.columns([4, 6])
+    c1.header("Input")
+    c1.markdown("Select the number of random points between 0 and 100 with the slider below")
     num_points = c1.slider("Number of points", min_value=100, max_value=250, value=150, step=10)
     points = np.random.uniform(low=[0,0], high=[100,100], size=(num_points,2))
     df = pd.DataFrame(data=points, columns=["x", "y"])
-    rando_plot = (alt.Chart(df)
-                    .mark_circle()
-                    .encode(
-                        alt.X("x", scale=alt.Scale(domain=(0, 100))),
-                        alt.Y("y", scale=alt.Scale(domain=(0, 100))),
-                    ))
-    c2.altair_chart(rando_plot)
+    c2.altair_chart(visualization.scatterplot_from_df(df))
 
     # The content
     st.header("Target")
-    st.markdown("The initial shape will be random points to obtain better results")
     shape_start = "rando"
-
-    st.markdown("Draw lines on desired end shape, with the convention Line Start (x1,y1) -> Line End (x2,y2)")
     shape_end = "drawable_canvas"
     c1, c2, c3, c4, c5 = st.columns([1,1,1,2,1])
-    x1 = c1.number_input("Line start: x1", min_value=0,  max_value=100, value=0)
-    y1 = c2.number_input("Line start: y1", min_value=0,  max_value=100, value=0)
-    x2 = c1.number_input("Line end: x2", min_value=0,  max_value=100, value=100)
-    y2 = c2.number_input("Line end: y2", min_value=0,  max_value=100, value=100)
+    x1 = c1.number_input("Line start: x1", min_value=0,  max_value=100, value=20)
+    y1 = c2.number_input("Line start: y1", min_value=0,  max_value=100, value=20)
+    x2 = c1.number_input("Line end: x2", min_value=0,  max_value=100, value=80)
+    y2 = c2.number_input("Line end: y2", min_value=0,  max_value=100, value=80)
 
+    # Start with the streamlit shape
     if "lines" not in st.session_state:
-        st.session_state["lines"] = []
-
+        l1 = [[18.75, 20], [0, 65]]
+        l2 = [l1[-1], [31.25, 49.375]]
+        l3 = [l2[-1], [50, 73.125]]
+        l4 = [l3[-1], [68.75, 49.375]]
+        l5 = [l4[-1], [100, 64]]
+        l6 = [l5[-1], [81.25, 20]]
+        l7 = [l6[-1], l1[0]]
+        lines = [l1, l2, l3, l4, l5, l6, l7]
+        st.session_state["lines"] = lines
+        
     if c3.button("Add Line"):
         st.session_state["lines"].append([[x1,y1], [x2,y2]])
     
     # Draw current lines
-    plot = alt.LayerChart() # Starting value, empty chart
-    for line in st.session_state["lines"]:
-        df_lines = pd.DataFrame(data=line, columns=["x", "y"])
-        plot = plot + alt.Chart(df_lines).mark_line().encode(x='x',y='y')
-    c4.altair_chart(plot)
-    if c5.button("Clear Lines"):
-        st.session_state["lines"] = []
+    c4.altair_chart(visualization.chart_from_lines(st.session_state["lines"]))
+    c5.button("Clear Lines", on_click=clear_lines)
 
-
+    # The Iteration
     st.title("Iteration")
     if len(st.session_state["lines"])==0:
         st.markdown("Please add at least 1 line")

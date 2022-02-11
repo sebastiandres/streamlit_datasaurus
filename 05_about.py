@@ -20,17 +20,16 @@ def display_page():
     # Anscombe
     c2.header("The Anscombe Dataset")
     c2.markdown("""
-    * [Original publication by Francis Anscombe on 1973](https://www.tandfonline.com/doi/abs/10.1080/00031305.1973.10478966)
-    * [Wikipedia's entry on Anscombe's Quarter](https://en.wikipedia.org/wiki/Anscombe%27s_quartet)
+    * [Original publication on 1973](https://www.tandfonline.com/doi/abs/10.1080/00031305.1973.10478966) by Francis Anscombe.
+    * [Wikipedia's entry on Anscombe's Quarter](https://en.wikipedia.org/wiki/Anscombe%27s_quartet).
     """)    
 
-
-    # Datasaurius
+    # Datasaurus
     c2.header("The Datasaurus")
     c2.markdown("""
     * [The tweet that originated the madness](https://twitter.com/albertocairo/status/765167969139765250) by Alberto Cairo.
     * [Same Stats, Different Graphs - also known as the Datasaurus paper](https://www.autodesk.com/research/publications/same-stats-different-graphs) by Justin Matejka and George Fitzmaurice.
-    * [Python implementation of Same Stats, Different Graphs](https://github.com/jmatejka/same-stats-different-graphs) by jmatejka.
+    * [Python implementation of Same Stats, Different Graphs](https://github.com/jmatejka/same-stats-different-graphs) by jmatejka. Huge thanks, this was a time saver!
     """)
 
     # Other links and references

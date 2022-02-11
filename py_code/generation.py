@@ -10,12 +10,12 @@ import tqdm
 
 import os
 
-LINE_SHAPES = [
-    'x', 'h_lines', 'v_lines', 'wide_lines', 'high_lines', 'slant_up',
-    'slant_down', 'center', 'star', 'down_parab', 'streamlit',
-]
-ALL_TARGETS = LINE_SHAPES + ['circle', 'bullseye', 'dots'] + ['drawable_canvas']
-INITIAL_DATASETS = ['dino', 'rando', 'slant', 'big_slant']
+try:
+    from keywords import LINE_SHAPES, ALL_TARGETS
+    from keywords import INITIAL_DATASETS
+except:
+    from .keywords import LINE_SHAPES, ALL_TARGETS
+    from .keywords import INITIAL_DATASETS
 
 def load_dataset(name="dino"):
     """Loads the example data sets used in the paper.
@@ -185,11 +185,6 @@ def get_points_for_shape(line_shape):
         l4 = [[0, 50], [50, 0]]
         l5 = [[50, 100], [100, 50]]
         lines = [l1, l2, l3, l4, l5]
-    elif line_shape == 'center':
-        cx = 54.26
-        cy = 47.83
-        l1 = [[cx, cy], [cx, cy]]
-        lines = [l1]
     elif line_shape == 'star':
         star_pts = [10, 40, 40, 40, 50, 10, 60, 40, 90, 40, 65, 60, 75, 90, 50, 70, 25, 90, 35, 60]
         pts = [star_pts[i:i + 2] for i in range(0, len(star_pts), 2)]
@@ -200,13 +195,13 @@ def get_points_for_shape(line_shape):
         curve = [[x, -((x - 50) / 4)**2 + 90] for x in np.arange(0, 100, 3)]
         lines = [curve[i:i + 2] for i in range(0, len(curve) - 1, 1)]
     elif line_shape == 'streamlit':
-        l1 = [[70, 35], [30, 35]]
-        l2 = [l1[-1], [20, 60]]
-        l3 = [l2[-1], [40, 50]]
-        l4 = [l3[-1], [50, 65]]
-        l5 = [l4[-1], [60, 50]]
-        l6 = [l5[-1], [80, 60]]
-        l7 = [l6[-1], l1[1]]
+        l1 = [[18.75, 20], [0, 65]]
+        l2 = [l1[-1], [31.25, 49.375]]
+        l3 = [l2[-1], [50, 73.125]]
+        l4 = [l3[-1], [68.75, 49.375]]
+        l5 = [l4[-1], [100, 64]]
+        l6 = [l5[-1], [81.25, 20]]
+        l7 = [l6[-1], l1[0]]
         lines = [l1, l2, l3, l4, l5, l6, l7]
     else:
         raise ValueError(line_shape)
@@ -408,17 +403,16 @@ def run_pattern(df,
             r_good = test_good
 
         # Custom filepath
-        custom_filepath = "./data/{}_to_{}".format(shape_start, target)
+        custom_filepath = "./data/precomputed_transitions/{}_to_{}".format(shape_start, target)
 
-        try:
-            os.mkdir("./data")
-        except:
-            pass 
-
-        try:
-            os.mkdir(custom_filepath)
-        except:
-            pass       
+        # Create the folders, if not created previously
+        if store_csv:
+            folders = ["./data", "./data/precomputed_transitions", custom_filepath]
+            for folder in folders:
+                try:
+                    os.mkdir(folder)
+                except:
+                    pass 
 
         # save this chart to the file
         for _ in range(write_frames.count(i)):
@@ -437,7 +431,7 @@ def print_stats(df):
     print("Pearson correlation: ", df.corr().x.y)
 
 
-def run(shape_start, shape_end, 
+def run(shape_start, shape_end, store_csv=False,
         iters=100000, num_frames=100, decimals=2):
     if shape_start not in INITIAL_DATASETS:
         print("shape_start must be one of ", INITIAL_DATASETS)
@@ -449,14 +443,11 @@ def run(shape_start, shape_end,
 
     df = load_dataset(shape_start)
     run_pattern(df, shape_start, shape_end, 
-                iters=iters, num_frames=num_frames, decimals=decimals, store_csv=False)
+                iters=iters, num_frames=num_frames, decimals=decimals, store_csv=store_csv)
     return
 
 if __name__ == '__main__':
-    # shape_start must be one of 
-    # ['dino', 'rando', 'slant', 'big_slant']
-    #
-    # shape_end must be one of  
-    # ['x', 'h_lines', 'v_lines', 'wide_lines', 'high_lines', 'slant_up', 
-    # 'slant_down', 'center', 'star', 'down_parab', 'circle', 'bullseye', 'dots']
-    run('rando', 'streamlit')#, iters=100, num_frames=100)
+    for shape_start in INITIAL_DATASETS:
+        for shape_end in ALL_TARGETS:
+            print(f"Computing {shape_start} to {shape_end}")
+            run(shape_start, shape_end, store_csv=True)

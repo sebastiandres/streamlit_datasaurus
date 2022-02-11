@@ -105,6 +105,46 @@ def plot_frame(df, size=300):
 
     return chart
 
+def scatterplot_from_df(df, size=300):
+    scatterplot = (
+        alt.Chart(df)
+        .mark_circle(color="white", opacity=1)
+        .encode(
+            alt.X("x", scale=alt.Scale(domain=(0, 100))),
+            alt.Y("y", scale=alt.Scale(domain=(0, 100))),
+        )
+        .properties(width=size, height=size)
+    )
+    return themed_plot(scatterplot)
+
+def themed_plot(my_plot):
+    chart = (
+        (my_plot)
+        .properties(
+            background="#235099",
+            padding={"left": 20, "top": 20, "right": 20, "bottom": 20},
+        )
+        .configure_axis(
+            gridColor="#fff9",
+            domainColor="#fff",
+            labelColor="#fff",
+            tickColor="#fff",
+            titleColor="#fff",
+        )
+        .configure_view(strokeOpacity=0)
+    )
+    return chart
+
+def chart_from_lines(lines):
+    # Draw current lines
+    plot = alt.LayerChart() # Starting value, empty chart
+    for line in lines:
+        df_lines = pd.DataFrame(data=line, columns=["x", "y"])
+        plot = plot + alt.Chart(df_lines).mark_line(point=True, strokeWidth=5, color="#FFFFFF").encode(
+            alt.X("x", scale=alt.Scale(domain=(0, 100))),
+            alt.Y("y", scale=alt.Scale(domain=(0, 100))),
+        )
+    return themed_plot(plot).configure_point(size=200)
 
 def animate_from_path(shape_start, shape_end):
     # Placeholders to be filled in later
@@ -114,7 +154,7 @@ def animate_from_path(shape_start, shape_end):
     num_frames = 100
     for i in range(num_frames):
         time.sleep(0.01)
-        filename = f"data/{shape_start}_to_{shape_end}/frame-{i:05}.csv"
+        filename = f"data/precomputed_transitions/{shape_start}_to_{shape_end}/frame-{i:05}.csv"
         df = pd.read_csv(filename)
         animate_from_df(
             df,

@@ -10,8 +10,8 @@ st.set_page_config(layout="wide", page_title="Streamlitsaurus Rex",
 page_dict = {
             "Why": "00_why", 
             "Intro": "01_intro", 
-            "Precomputed": "02_precomputed", 
-            "Computed": "03_computed", 
+            #"Precomputed": "02_precomputed", 
+            "Datasaurus": "03_datasaurus", 
             "Custom": "04_custom", 
             "About": "05_about"}
 st.sidebar.header("Select page")
