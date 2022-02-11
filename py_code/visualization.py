@@ -2,8 +2,8 @@
 import streamlit as st
 import pandas as pd
 import altair as alt
-import time
-
+#import time
+import glob
 
 def get_values(df):
     """Calculates the summary statistics for the given set of points
@@ -105,7 +105,7 @@ def plot_frame(df, size=300):
 
     return chart
 
-def scatterplot_from_df(df, size=300):
+def scatterplot_from_df(df, size=300, themed=True):
     scatterplot = (
         alt.Chart(df)
         .mark_circle(color="white", opacity=1)
@@ -115,7 +115,10 @@ def scatterplot_from_df(df, size=300):
         )
         .properties(width=size, height=size)
     )
-    return themed_plot(scatterplot)
+    if themed:
+        return themed_plot(scatterplot)
+    else:
+        return scatterplot
 
 def themed_plot(my_plot):
     chart = (
@@ -153,7 +156,7 @@ def animate_from_path(shape_start, shape_end):
     # Iterate
     num_frames = 100
     for i in range(num_frames):
-        time.sleep(0.01)
+        #time.sleep(0.01)
         filename = f"data/precomputed_transitions/{shape_start}_to_{shape_end}/frame-{i:05}.csv"
         df = pd.read_csv(filename)
         animate_from_df(
@@ -175,3 +178,19 @@ def animate_from_df(
         plot = plot_frame(df)
         altair_placeholder.altair_chart(plot)
         progress_bar_placeholder.progress(progress)
+
+def plot_datasaurus_sets(size=200):
+    vplots = []
+    filename = "data/datasaurus_datasets/DatasaurusDozen-wide.tsv"
+    for i in range(3):
+        hplots = []
+        for j in range(4):
+            n = i * 4 + j
+            df = pd.read_csv(filename, skiprows=1, usecols=(2*n, 2*n+1), sep="\t")
+            df.columns = ["x", "y"]
+            #st.write(get_values(df))
+            hplots.append(scatterplot_from_df(df, size=size, themed=False))
+        vplots.append(alt.hconcat(*hplots))
+    # Plot them all
+    st.altair_chart(alt.vconcat(*vplots))
+    return

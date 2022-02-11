@@ -5,7 +5,7 @@ def display_page():
     st.title("About")
 
     # Columns
-    c1, c2  = st.columns([2,8])
+    c1, c2  = st.columns([3,8])
 
     # Image
     image_markdown_format = "![Alt Text](https://github.com/sebastiandres/streamlit_datasaurus/blob/main/images/{}?raw=true)"
