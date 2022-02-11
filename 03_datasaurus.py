@@ -16,6 +16,12 @@ def display_page():
                 }
     selected_option_text = st.radio("How much time can you spare?", options.keys(), index=0)
     selected_option = options[selected_option_text]
+    if selected_option == list(options.values())[0]:
+        # First option selected: compute slowly
+        button_text = "Compute and Show!"
+    else:
+        # Second options selected: just animate
+        button_text = "SHOW ME, FAST!"
 
     # The content
     c1, c2, c3 = st.columns([1, 1, 3])
@@ -24,7 +30,9 @@ def display_page():
     shape_start = c1.selectbox("Select the starting shape", shape_start_options)
     shape_end = c2.selectbox("Select the target shape", shape_end_options)
 
-    if c3.button("Show me!"):
+    c3.markdown("\n") # To make the button move down
+    c3.markdown("\n") # To make the button move down
+    if c3.button(button_text):
         if selected_option == "animate":
             visualization.animate_from_path(shape_start, shape_end)
         else:
