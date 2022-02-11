@@ -2,7 +2,7 @@ import streamlit as st
 
 def display_page():
     st.title("Welcome!")
-    c1, c2 = st.columns([4,6])
+    c2, c1 = st.columns([4,6])
     image_placeholder = c1.empty()
 
     # Markdown for image
