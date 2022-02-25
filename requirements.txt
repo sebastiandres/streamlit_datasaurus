@@ -1,7 +1,4 @@
 streamlit
-pandas
-numpy
-matplotlib
-altair
+streamlit_book==0.7.0
 tqdm
 pytweening

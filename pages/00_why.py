@@ -33,3 +33,5 @@ def display_page():
         c2.markdown("Join the quest to learn about the ellusive Datasaurus.")
 
         c2.markdown("Use the sidebar to navigate through this interactive Streamlit app")
+
+display_page()

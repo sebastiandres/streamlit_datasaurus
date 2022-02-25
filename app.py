@@ -1,22 +1,26 @@
 import streamlit as st
-import importlib
+import streamlit_book as stb
 
 # Set page configuration
 st.set_page_config(layout="wide", page_title="Streamlitsaurus Rex",
                    page_icon="🦖",
                    initial_sidebar_state="expanded")
 
-# Sidebar
-page_dict = {
-            "Welcome!": "00_why", 
-            "What is a Datasaurus?": "01_intro", 
-            "Where can I see a Datasaurus?": "03_datasaurus", 
-            "Can I have my own Datasaurus?": "04_custom", 
-            "About": "05_about"}
-st.sidebar.header("Navigation")
-selected_page = st.sidebar.selectbox("Select page", page_dict.keys())
-selected_module = page_dict[selected_page]
-
-# Render the content
-current_module = importlib.import_module(selected_module)
-current_module.display_page()
+# Streamit book properties
+stb.set_book_config(menu_title="Streamlitsaurus Rex",
+                    menu_icon="",
+                    options=[
+                            "Welcome!",
+                            "What is a Datasaurus?",
+                            "Where can I see one?",
+                            "Can I create a Datasaurus?",
+                            "About"
+                            ],
+                    paths=[
+                            "pages/00_why.py",
+                            "pages/01_intro.py",
+                            "pages/03_datasaurus.py",
+                            "pages/04_custom.py",
+                            "pages/05_about.py"
+                          ],
+                    )
