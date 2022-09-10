@@ -17,10 +17,10 @@ stb.set_book_config(menu_title="Datasaurus Rex",
                             "About"
                             ],
                     paths=[
-                            "pages/00_why.py",
-                            "pages/01_intro.py",
-                            "pages/03_datasaurus.py",
-                            "pages/04_custom.py",
-                            "pages/05_about.py"
+                            "docs/00_why.py",
+                            "docs/01_intro.py",
+                            "docs/03_datasaurus.py",
+                            "docs/04_custom.py",
+                            "docs/05_about.py"
                           ],
                     )
