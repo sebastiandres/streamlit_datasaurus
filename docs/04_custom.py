@@ -17,11 +17,11 @@ st.markdown("YES. YOU CAN CREATE YOUR OWN DATASAURUS!!! HOW CRAZY IS THAT???!!! 
 ## Input
 c1, c2 = st.columns([4, 6])
 c1.header("Input")
-c1.markdown("Select the number of random points between 0 and 100 with the slider below")
+c1.markdown("Select the number of random points between 100 and 250 with the slider below")
 num_points = c1.slider("Number of points", min_value=100, max_value=250, value=150, step=10)
 points = np.random.uniform(low=[0,0], high=[100,100], size=(num_points,2))
 df = pd.DataFrame(data=points, columns=["x", "y"])
-c2.altair_chart(visualization.scatterplot_from_df(df))
+c2.altair_chart(visualization.scatterplot_from_df(df), use_container_width=False)
 
 # The content
 st.header("Target")
@@ -49,7 +49,7 @@ if c3.button("Add Line"):
     st.session_state["lines"].append([[x1,y1], [x2,y2]])
 
 # Draw current lines
-c4.altair_chart(visualization.chart_from_lines(st.session_state["lines"]))
+c4.altair_chart(visualization.chart_from_lines(st.session_state["lines"]), use_container_width=False)
 c5.button("Clear Lines", on_click=clear_lines)
 
 # The Iteration

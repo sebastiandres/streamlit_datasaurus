@@ -1,4 +1,29 @@
+[server]
+enableStaticServing = true
+
 [theme]
+primaryColor = "#e30721"
+backgroundColor = "#14100d"
+secondaryBackgroundColor = "#e30721"
+showWidgetBorder = true
+textColor = "#fdfefd"
+linkColor = "#2a65aa"
+linkUnderline = false
+font = "Garamond"
+codeBackgroundColor = "#f9f9f9"
+
+[theme.sidebar]
+backgroundColor = "#14100d"
+secondaryBackgroundColor = "#e30721"
+
+[colors]
+yellow = "#fde000"
+red = "#e30721"
+black = "#14100d"
+white = "#fdfefd"
+
+
+[oldtheme]
 primaryColor="#4978c3"
 backgroundColor="#235099"
 secondaryBackgroundColor="#4978c3"

@@ -5,6 +5,12 @@ import altair as alt
 #import time
 import glob
 
+# Colors
+yellow = "#fde000"
+red = "#e30721"
+black = "#14100d"
+white = "#fdfefd"
+
 def get_values(df):
     """Calculates the summary statistics for the given set of points
 
@@ -90,15 +96,15 @@ def plot_frame(df, size=300):
     chart = (
         (scatterplot | labels_9_dec + labels_2_dec)
         .properties(
-            background="#235099",
+            background=black,
             padding={"left": 20, "top": 20, "right": 20, "bottom": 20},
         )
         .configure_axis(
-            gridColor="#fff9",
-            domainColor="#fff",
-            labelColor="#fff",
-            tickColor="#fff",
-            titleColor="#fff",
+            gridColor=white,
+            domainColor=white,
+            labelColor=white,
+            tickColor=white,
+            titleColor=white,
         )
         .configure_view(strokeOpacity=0)
     )
@@ -124,15 +130,16 @@ def themed_plot(my_plot):
     chart = (
         (my_plot)
         .properties(
-            background="#235099",
+            background=black,
             padding={"left": 20, "top": 20, "right": 20, "bottom": 20},
         )
         .configure_axis(
-            gridColor="#fff9",
-            domainColor="#fff",
-            labelColor="#fff",
-            tickColor="#fff",
-            titleColor="#fff",
+            gridColor=white,
+            gridOpacity=0.5,
+            domainColor=white,
+            labelColor=white,
+            tickColor=white,
+            titleColor=white,
         )
         .configure_view(strokeOpacity=0)
     )
@@ -179,6 +186,7 @@ def animate_from_df(
         altair_placeholder.altair_chart(plot)
         progress_bar_placeholder.progress(progress)
 
+
 def plot_datasaurus_sets(size=200):
     vplots = []
     filename = "data/datasaurus_datasets/DatasaurusDozen-wide.tsv"
@@ -192,5 +200,5 @@ def plot_datasaurus_sets(size=200):
             hplots.append(scatterplot_from_df(df, size=size, themed=False))
         vplots.append(alt.hconcat(*hplots))
     # Plot them all
-    st.altair_chart(alt.vconcat(*vplots))
+    st.altair_chart(alt.vconcat(*vplots), use_container_width=False)
     return
